@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:barbar_saloon_app/screens/signup_screen.dart';
+import 'package:barbar_saloon_app/config/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../widgets/onboarding_page.dart';
@@ -41,10 +42,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final double fontSize = MediaQuery.of(context).size.width * 0.025;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF2F1FF),
+      backgroundColor: AppColors.backgroundLight,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: const Color(0xFFF2F1FF),
+        backgroundColor: AppColors.backgroundLight,
         title: const Text(''),
         actions: [
           Padding(
@@ -58,7 +59,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 minFontSize: 16,
                 maxFontSize: 28,
                 style: TextStyle(
-                  color: const Color(0xFF767676),
+                  color: AppColors.textGrey,
                   fontFamily: 'NunitoSans',
                   fontSize: fontSize,
                 ),
@@ -92,7 +93,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           Expanded(
             flex: 2,
             child: Container(
-              color: Color(0xFFFDFDFD),
+              color: AppColors.backgroundWhite,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 0),
                 child: Row(
@@ -106,8 +107,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       effect:  ExpandingDotsEffect(
                         dotHeight: 12,
                         dotWidth: 12,
-                        activeDotColor: Color(0xFF6F45F0),
-                        dotColor: Colors.grey,
+                        activeDotColor: AppColors.primary,
+                        dotColor: AppColors.greyLight,
                         expansionFactor:2.5,
                       ),
                     ),

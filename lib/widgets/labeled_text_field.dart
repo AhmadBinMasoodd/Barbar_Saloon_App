@@ -1,3 +1,4 @@
+import 'package:barbar_saloon_app/config/colors.dart';
 import 'package:flutter/material.dart';
 
 class LabeledTextField extends StatefulWidget {
@@ -31,7 +32,7 @@ class _LabeledTextFieldState extends State<LabeledTextField> {
         Text(
           widget.label,
           style: const TextStyle(
-            color: Color(0xFF222222),
+            color: AppColors.textBlack,
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
@@ -48,7 +49,7 @@ class _LabeledTextFieldState extends State<LabeledTextField> {
 
             hintStyle: const TextStyle(
               fontSize: 20,
-              color: Color(0xFF9B9B9B),
+              color: AppColors.textGreyMedium,
             ),
 
             contentPadding: const EdgeInsets.symmetric(
@@ -58,14 +59,14 @@ class _LabeledTextFieldState extends State<LabeledTextField> {
 
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: Color(0xFFE1E1E1),
+                color: AppColors.borderLight,
                 width: 1.5,
               ),
               borderRadius: BorderRadius.circular(8),
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
-                color: Color(0xFF6F45F0),
+                color: AppColors.primary,
                 width: 1.5,
               ),
               borderRadius: BorderRadius.circular(8),
@@ -79,7 +80,7 @@ class _LabeledTextFieldState extends State<LabeledTextField> {
                 isHidden
                     ? Icons.visibility_off
                     : Icons.visibility,
-                color: Color(0xFF6F45F0),
+                color: AppColors.primary,
               ),
             )
                 : null,

@@ -1,3 +1,4 @@
+import 'package:barbar_saloon_app/config/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -18,8 +19,8 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF6F45F0),
-          foregroundColor: const Color(0xFFFFFCF9),
+          backgroundColor: AppColors.buttonBackground,
+          foregroundColor: AppColors.buttonText,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(25), // fully rounded

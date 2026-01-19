@@ -1,3 +1,4 @@
+import 'package:barbar_saloon_app/config/colors.dart';
 import 'package:flutter/material.dart';
 
 class LabeledDropdown extends StatefulWidget {
@@ -31,9 +32,9 @@ class _LabeledDropdownState extends State<LabeledDropdown> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppColors.white,
             border: Border.all(
-              color: const Color(0xFFE1E1E1),
+              color: AppColors.borderLight,
               width: 1.5,
             ),
             borderRadius: BorderRadius.circular(8),

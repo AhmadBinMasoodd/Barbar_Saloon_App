@@ -1,3 +1,4 @@
+import 'package:barbar_saloon_app/config/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 
@@ -63,12 +64,12 @@ class _LabeledPhoneFieldState extends State<LabeledPhoneField> {
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     borderSide:
-                    const BorderSide(color: Color(0xFFE1E1E1), width: 1.5),
+                    const BorderSide(color: AppColors.borderLight, width: 1.5),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                     borderSide:
-                    const BorderSide(color: Color(0xFF6F45F0), width: 1.5),
+                    const BorderSide(color: AppColors.primary, width: 1.5),
                   ),
                   contentPadding:
                   const EdgeInsets.symmetric(horizontal: 12, vertical: 14),

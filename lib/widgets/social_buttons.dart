@@ -1,3 +1,4 @@
+import 'package:barbar_saloon_app/config/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -63,13 +64,13 @@ class SocialLoginSection extends StatelessWidget {
         width: 45,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: Colors.grey.shade300),
+          border: Border.all(color: AppColors.socialBorderColor.withValues(alpha: 0.3)),
         ),
         child: Center(
           child: FaIcon(
             icon,
             size: 22,
-            color: Colors.black87,
+            color: AppColors.socialIconColor,
           ),
         ),
       ),

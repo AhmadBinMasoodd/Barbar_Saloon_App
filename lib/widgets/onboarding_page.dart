@@ -1,6 +1,6 @@
+import 'package:barbar_saloon_app/config/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
 
 class OnboardingPage extends StatelessWidget {
   final String heading;
@@ -36,7 +36,7 @@ class OnboardingPage extends StatelessWidget {
           child: Container(
             width: double.infinity,
             decoration: const BoxDecoration(
-              color: Color(0xFFFDFDFD),
+              color: AppColors.backgroundWhite,
               borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
             ),
             padding: const EdgeInsets.all(24),

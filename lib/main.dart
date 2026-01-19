@@ -1,6 +1,7 @@
 import 'package:barbar_saloon_app/screens/home_screen.dart';
 import 'package:barbar_saloon_app/screens/onboarding_screen.dart';
 import 'package:barbar_saloon_app/screens/splash_screen.dart';
+import 'package:barbar_saloon_app/config/colors.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,8 +19,8 @@ class MyApp extends StatelessWidget {
 
       theme: ThemeData(
           fontFamily: 'NunitoSans',
-          colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFFF2F1FF)),
-          scaffoldBackgroundColor: const Color(0xFFF2F1FF)
+          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.backgroundLight),
+          scaffoldBackgroundColor: AppColors.backgroundLight
       ),
       home: const OnboardingScreen(),
     );

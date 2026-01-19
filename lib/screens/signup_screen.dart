@@ -3,6 +3,7 @@ import 'package:barbar_saloon_app/widgets/app_bar.dart';
 import 'package:barbar_saloon_app/widgets/labeled_phone_field.dart';
 import 'package:barbar_saloon_app/widgets/labeled_text_field.dart';
 import 'package:barbar_saloon_app/widgets/social_buttons.dart';
+import 'package:barbar_saloon_app/config/colors.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,7 @@ class SignupScreen extends StatelessWidget {
       appBar: const MyAppBar(title: 'Signup'),
       body: Container(
         decoration: const BoxDecoration(
-          color: Color(0xFF6F45F0),
+          color: AppColors.primary,
           borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
         ),
         child: SingleChildScrollView(
@@ -37,7 +38,7 @@ class SignupScreen extends StatelessWidget {
                 width: double.infinity,
                 padding: const EdgeInsets.all(16),
                 decoration: const BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.white,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
                 ),
                 child: Column(

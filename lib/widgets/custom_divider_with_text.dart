@@ -21,10 +21,7 @@ class CustomDividerWithText extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: Divider(
-            color: lineColor,
-            thickness: thickness,
-          ),
+          child: Divider(color: lineColor, thickness: thickness),
         ),
         const SizedBox(width: 8),
         Text(
@@ -37,10 +34,7 @@ class CustomDividerWithText extends StatelessWidget {
         ),
         const SizedBox(width: 8),
         Expanded(
-          child: Divider(
-            color: lineColor,
-            thickness: thickness,
-          ),
+          child: Divider(color: lineColor, thickness: thickness),
         ),
       ],
     );

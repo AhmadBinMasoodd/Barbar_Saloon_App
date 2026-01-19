@@ -1,4 +1,5 @@
 import 'package:barbar_saloon_app/widgets/app_bar.dart';
+import 'package:barbar_saloon_app/config/colors.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class VerificationScreen extends StatelessWidget {
       appBar: const MyAppBar(title: 'Verification'),
       body: Container(
         decoration: const BoxDecoration(
-          color: Color(0xFF6F45F0),
+          color: AppColors.primary,
           borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
         ),
         child: SingleChildScrollView(
@@ -24,7 +25,7 @@ class VerificationScreen extends StatelessWidget {
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 decoration: const BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.white,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
                 ),
                 child: Column(
@@ -108,7 +109,7 @@ class VerificationScreen extends StatelessWidget {
           TextSpan(
             text: "Resend",
             style: const TextStyle(
-              color: Color(0xFF6F45F0),
+              color: AppColors.primary,
               fontWeight: FontWeight.bold,
             ),
             recognizer: TapGestureRecognizer()
