@@ -20,19 +20,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     {
       'heading': 'Explore Freelancer Barbar in your Area',
       'description':
-      'Quam laoreet eget vel amet enim, pretium. Pellentesque tellus erat in sed urna porttitor. Scelerisque lectus',
+          'Quam laoreet eget vel amet enim, pretium. Pellentesque tellus erat in sed urna porttitor. Scelerisque lectus',
       'image': 'assets/images/Layer 1.png',
     },
     {
       'heading': 'Book Services Easily',
       'description':
-      'Find professionals near you and book their services within a few clicks.',
+          'Find professionals near you and book their services within a few clicks.',
       'image': 'assets/images/Frame.png',
     },
     {
       'heading': 'Start Your Journey',
       'description':
-      'Sign up or log in to access all features and get started today.',
+          'Sign up or log in to access all features and get started today.',
       'image': 'assets/images/Frame.png',
     },
   ];
@@ -52,7 +52,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             padding: const EdgeInsets.all(8.0),
             child: TextButton(
               onPressed: () {
-                controller.jumpToPage(onboardingData.length - 1); // skip to last
+                controller.jumpToPage(
+                  onboardingData.length - 1,
+                ); // skip to last
               },
               child: AutoSizeText(
                 'Skip',
@@ -95,21 +97,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             child: Container(
               color: AppColors.backgroundWhite,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 0,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-
                     // Page indicator
                     SmoothPageIndicator(
                       controller: controller,
                       count: onboardingData.length,
-                      effect:  ExpandingDotsEffect(
+                      effect: ExpandingDotsEffect(
                         dotHeight: 12,
                         dotWidth: 12,
                         activeDotColor: AppColors.primary,
                         dotColor: AppColors.greyLight,
-                        expansionFactor:2.5,
+                        expansionFactor: 2.5,
                       ),
                     ),
 
@@ -125,7 +129,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             );
                           } else {
                             // Navigate to login/signup screen
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>SignupScreen()));
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SignupScreen(),
+                              ),
+                            );
                           }
                         },
                         style: ElevatedButton.styleFrom(
@@ -144,15 +153,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           height: 50,
                         ),
                       ),
-                    )
-
-
+                    ),
                   ],
                 ),
               ),
             ),
           ),
-
         ],
       ),
     );

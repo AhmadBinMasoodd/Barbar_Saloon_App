@@ -10,7 +10,7 @@ class OnboardingPage extends StatelessWidget {
     super.key,
     required this.heading,
     required this.description,
-    required this.image
+    required this.image,
   });
 
   @override

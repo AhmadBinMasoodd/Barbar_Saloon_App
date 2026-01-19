@@ -82,12 +82,7 @@ class SignupScreen extends StatelessWidget {
                       ),
                     ),
 
-                    _formField(
-                      CustomButton(
-                        text: "Signup",
-                        onPressed: () {},
-                      ),
-                    ),
+                    _formField(CustomButton(text: "Signup", onPressed: () {})),
 
                     _formField(
                       const CustomDividerWithText(
@@ -118,7 +113,7 @@ class SignupScreen extends StatelessWidget {
   Widget _buildHeaderText() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-      child:SizedBox(
+      child: SizedBox(
         width: 400, // Adjust this value based on your screen size
         child: const Text(
           'Sign up to access all the features in Barber Shop',
@@ -161,7 +156,12 @@ class SignupScreen extends StatelessWidget {
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
                   // TODO: navigate to login page
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>VerificationScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => VerificationScreen(),
+                    ),
+                  );
                 },
             ),
           ],

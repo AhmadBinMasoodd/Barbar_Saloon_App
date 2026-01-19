@@ -5,11 +5,7 @@ class CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
 
-  const CustomButton({
-    super.key,
-    required this.text,
-    required this.onPressed,
-  });
+  const CustomButton({super.key, required this.text, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +29,7 @@ class CustomButton extends StatelessWidget {
             letterSpacing: 0,
           ),
         ),
-        child: Text(
-          text,
-          textAlign: TextAlign.center,
-        ),
+        child: Text(text, textAlign: TextAlign.center),
       ),
     );
   }

@@ -33,10 +33,7 @@ class _LabeledDropdownState extends State<LabeledDropdown> {
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(
             color: AppColors.white,
-            border: Border.all(
-              color: AppColors.borderLight,
-              width: 1.5,
-            ),
+            border: Border.all(color: AppColors.borderLight, width: 1.5),
             borderRadius: BorderRadius.circular(8),
           ),
           child: DropdownButtonHideUnderline(
@@ -52,10 +49,7 @@ class _LabeledDropdownState extends State<LabeledDropdown> {
                 widget.onChanged(value!);
               },
               items: widget.items.map((item) {
-                return DropdownMenuItem(
-                  value: item,
-                  child: Text(item),
-                );
+                return DropdownMenuItem(value: item, child: Text(item));
               }).toList(),
             ),
           ),

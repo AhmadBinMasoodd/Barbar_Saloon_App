@@ -58,31 +58,22 @@ class _LabeledTextFieldState extends State<LabeledTextField> {
             ),
 
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: AppColors.borderLight,
-                width: 1.5,
-              ),
+              borderSide: BorderSide(color: AppColors.borderLight, width: 1.5),
               borderRadius: BorderRadius.circular(8),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: AppColors.primary,
-                width: 1.5,
-              ),
+              borderSide: BorderSide(color: AppColors.primary, width: 1.5),
               borderRadius: BorderRadius.circular(8),
             ),
 
             suffixIcon: widget.isPassword
                 ? IconButton(
-              onPressed: () =>
-                  setState(() => isHidden = !isHidden),
-              icon: Icon(
-                isHidden
-                    ? Icons.visibility_off
-                    : Icons.visibility,
-                color: AppColors.primary,
-              ),
-            )
+                    onPressed: () => setState(() => isHidden = !isHidden),
+                    icon: Icon(
+                      isHidden ? Icons.visibility_off : Icons.visibility,
+                      color: AppColors.primary,
+                    ),
+                  )
                 : null,
           ),
         ),

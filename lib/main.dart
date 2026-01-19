@@ -18,12 +18,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
 
       theme: ThemeData(
-          fontFamily: 'NunitoSans',
-          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.backgroundLight),
-          scaffoldBackgroundColor: AppColors.backgroundLight
+        fontFamily: 'NunitoSans',
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.backgroundLight),
+        scaffoldBackgroundColor: AppColors.backgroundLight,
       ),
       home: const OnboardingScreen(),
     );
   }
 }
-

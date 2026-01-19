@@ -23,11 +23,7 @@ class SocialLoginSection extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-
-        _buildSocialButton(
-          icon: FontAwesomeIcons.google,
-          onPressed: onGoogle,
-        ),
+        _buildSocialButton(icon: FontAwesomeIcons.google, onPressed: onGoogle),
 
         const SizedBox(width: 15),
 
@@ -38,10 +34,7 @@ class SocialLoginSection extends StatelessWidget {
 
         const SizedBox(width: 15),
 
-        _buildSocialButton(
-          icon: FontAwesomeIcons.xTwitter,
-          onPressed: onX,
-        ),
+        _buildSocialButton(icon: FontAwesomeIcons.xTwitter, onPressed: onX),
 
         const SizedBox(width: 15),
 
@@ -64,14 +57,12 @@ class SocialLoginSection extends StatelessWidget {
         width: 45,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: AppColors.socialBorderColor.withValues(alpha: 0.3)),
+          border: Border.all(
+            color: AppColors.socialBorderColor.withValues(alpha: 0.3),
+          ),
         ),
         child: Center(
-          child: FaIcon(
-            icon,
-            size: 22,
-            color: AppColors.socialIconColor,
-          ),
+          child: FaIcon(icon, size: 22, color: AppColors.socialIconColor),
         ),
       ),
     );

@@ -50,7 +50,7 @@ class VerificationScreen extends StatelessWidget {
                     const SizedBox(height: 20),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -81,7 +81,7 @@ class VerificationScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(
         4,
-            (index) => Container(
+        (index) => Container(
           margin: const EdgeInsets.symmetric(horizontal: 6),
           width: 50,
           height: 55,
