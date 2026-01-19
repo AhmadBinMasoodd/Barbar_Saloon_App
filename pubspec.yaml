@@ -1,0 +1,37 @@
+name: barbar_saloon_app
+description: "A new Flutter project."
+publish_to: 'none'  # This prevents accidental publishing
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.9.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  auto_size_text: ^3.0.0
+  smooth_page_indicator: ^1.2.1
+  country_code_picker: ^3.4.1
+  font_awesome_flutter: ^10.12.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+
+  # Assets (make sure these folders exist)
+  assets:
+    - assets/images/
+
+  # Fonts
+  fonts:
+    - family: NunitoSans
+      fonts:
+        - asset: assets/fonts/NunitoSans-VariableFont_YTLC,opsz,wdth,wght.ttf
+        - asset: assets/fonts/NunitoSans-Italic-VariableFont_YTLC,opsz,wdth,wght.ttf
+          style: italic
