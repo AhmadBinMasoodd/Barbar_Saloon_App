@@ -1,25 +1,22 @@
-import 'package:barbar_saloon_app/screens/login_screen.dart';
+import 'package:barbar_saloon_app/screens/signup_screen.dart';
 import 'package:barbar_saloon_app/screens/verification_screen.dart';
-import 'package:barbar_saloon_app/widgets/app_bar.dart';
-import 'package:barbar_saloon_app/widgets/labeled_phone_field.dart';
-import 'package:barbar_saloon_app/widgets/labeled_text_field.dart';
-import 'package:barbar_saloon_app/widgets/social_buttons.dart';
-import 'package:barbar_saloon_app/config/colors.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../config/colors.dart';
+import '../widgets/app_bar.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_divider_with_text.dart';
 import '../widgets/labeled_dropdown.dart';
-
-class SignupScreen extends StatelessWidget {
-  const SignupScreen({super.key});
+import '../widgets/labeled_phone_field.dart';
+import '../widgets/labeled_text_field.dart';
+import '../widgets/social_buttons.dart';
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final nameController = TextEditingController();
     final emailController = TextEditingController();
-    final phoneController = TextEditingController();
     final passwordController = TextEditingController();
 
     return Scaffold(
@@ -44,13 +41,7 @@ class SignupScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    _formField(
-                      LabeledTextField(
-                        label: 'Full Name',
-                        hint: 'Enter your full name',
-                        controller: nameController,
-                      ),
-                    ),
+
                     _formField(
                       LabeledTextField(
                         label: 'Email',
@@ -59,21 +50,7 @@ class SignupScreen extends StatelessWidget {
                         isEmail: true,
                       ),
                     ),
-                    _formField(
-                      LabeledPhoneField(
-                        label: 'Phone Number',
-                        hint: 'Enter your number',
-                        controller: phoneController,
-                      ),
-                    ),
-                    _formField(
-                      LabeledDropdown(
-                        label: "Gender",
-                        hint: "Select Gender",
-                        items: const ["Male", "Female", "Other"],
-                        onChanged: print,
-                      ),
-                    ),
+
                     _formField(
                       LabeledTextField(
                         label: 'Password',
@@ -83,7 +60,7 @@ class SignupScreen extends StatelessWidget {
                       ),
                     ),
 
-                    _formField(CustomButton(text: "Signup", onPressed: () {
+                    _formField(CustomButton(text: "Login", onPressed: () {
 
                     })),
 
@@ -119,7 +96,7 @@ class SignupScreen extends StatelessWidget {
       child: SizedBox(
         width: 400, // Adjust this value based on your screen size
         child: const Text(
-          'Sign up to access all the features in Barber Shop',
+          'Login to access all the features in Barber Shop',
           style: TextStyle(
             fontFamily: 'Nunito Sans',
             fontWeight: FontWeight.w400,
@@ -147,11 +124,11 @@ class SignupScreen extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 20),
       child: RichText(
         text: TextSpan(
-          text: "Already have an account? ",
+          text: "Don't have an account? ",
           style: const TextStyle(color: Colors.black87, fontSize: 14),
           children: [
             TextSpan(
-              text: "Login",
+              text: "Sign up",
               style: const TextStyle(
                 color: Color(0xFF6F45F0),
                 fontWeight: FontWeight.bold,
@@ -162,7 +139,7 @@ class SignupScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => LoginScreen(),
+                      builder: (context) => SignupScreen(),
                     ),
                   );
                 },
