@@ -1,7 +1,9 @@
+import 'package:barbar_saloon_app/controllers/switch_controller.dart';
 import 'package:barbar_saloon_app/screens/signup_screen.dart';
 import 'package:barbar_saloon_app/screens/verification_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../config/colors.dart';
 import '../widgets/app_bar.dart';
@@ -11,28 +13,28 @@ import '../widgets/labeled_dropdown.dart';
 import '../widgets/labeled_phone_field.dart';
 import '../widgets/labeled_text_field.dart';
 import '../widgets/social_buttons.dart';
+
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
+  final SwitchController switchController = Get.put(SwitchController());
 
   @override
   Widget build(BuildContext context) {
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
-
     return Scaffold(
-      appBar: const MyAppBar(title: 'Signup'),
+      appBar: const MyAppBar(title: 'Login'),
       body: Container(
         decoration: const BoxDecoration(
           color: AppColors.primary,
           borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
         ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              _buildHeaderText(),
-
-              // White container
-              Container(
+        child: Column(
+          children: [
+            _buildHeaderText(),
+            // White container
+            Expanded(
+              child: Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(16),
                 decoration: const BoxDecoration(
@@ -41,7 +43,6 @@ class LoginScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-
                     _formField(
                       LabeledTextField(
                         label: 'Email',
@@ -50,7 +51,7 @@ class LoginScreen extends StatelessWidget {
                         isEmail: true,
                       ),
                     ),
-
+              
                     _formField(
                       LabeledTextField(
                         label: 'Password',
@@ -59,11 +60,9 @@ class LoginScreen extends StatelessWidget {
                         isPassword: true,
                       ),
                     ),
-
-                    _formField(CustomButton(text: "Login", onPressed: () {
-
-                    })),
-
+                    _forgetPassword(false),
+                    _formField(CustomButton(text: "Login", onPressed: () {})),
+              
                     _formField(
                       const CustomDividerWithText(
                         text: "Continue with",
@@ -73,18 +72,64 @@ class LoginScreen extends StatelessWidget {
                         fontSize: 16,
                       ),
                     ),
-
+              
                     _formField(const SocialLoginSection()),
-
+              
                     const SizedBox(height: 10),
-
+              
                     _buildLoginText(context),
                   ],
                 ),
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _forgetPassword(bool isSave) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+
+          Row(
+            children: [
+              Transform.scale(
+                scale: 0.7, // try 0.6 – 0.8
+                child: Obx(() => Switch(
+                  value: switchController.isOn.value,
+                  onChanged: switchController.toggleSwitch,
+                  activeColor: AppColors.primary,
+                  activeTrackColor: AppColors.primary.withOpacity(.4),
+                  inactiveThumbColor: AppColors.switchText,
+                  inactiveTrackColor: AppColors.switchText.withOpacity(.5),
+                )),
+              ),
+              Text(
+                'Save Me',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Nunito Sans',
+                  color: AppColors.switchText,
+                ),
+              ),
             ],
           ),
-        ),
+          TextButton(
+            onPressed: () {},
+            child: const Text(
+              'Forget Password?',
+              style: TextStyle(
+                fontSize: 18,
+                fontFamily: 'Nunito Sans',
+                color: AppColors.buttonBackground,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -138,9 +183,7 @@ class LoginScreen extends StatelessWidget {
                   // TODO: navigate to login page
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => SignupScreen(),
-                    ),
+                    MaterialPageRoute(builder: (context) => SignupScreen()),
                   );
                 },
             ),

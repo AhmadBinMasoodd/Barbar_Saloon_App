@@ -24,7 +24,7 @@ class AppColors {
   // Button Colors
   static const Color buttonBackground = Color(0xFF6F45F0);
   static const Color buttonText = Color(0xFFFFFCF9);
-
+  static const Color switchText = Color(0xFF767676);
   // Social Button Colors
   static const Color socialIconColor = Colors.black87;
   static const Color socialBorderColor = Colors.grey;

@@ -54,8 +54,8 @@ class OnboardingPage extends StatelessWidget {
                 const SizedBox(height: 16),
                 AutoSizeText(
                   description,
-                  minFontSize: 22,
-                  maxFontSize: 30,
+                  minFontSize: 16,
+                  maxFontSize: 25,
 
                   maxLines: 3,
                   textAlign: TextAlign.center,
