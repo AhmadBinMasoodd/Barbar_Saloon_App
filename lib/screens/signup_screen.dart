@@ -7,7 +7,7 @@ import 'package:barbar_saloon_app/widgets/social_buttons.dart';
 import 'package:barbar_saloon_app/config/colors.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_divider_with_text.dart';
 import '../widgets/labeled_dropdown.dart';
@@ -84,7 +84,9 @@ class SignupScreen extends StatelessWidget {
                     ),
 
                     _formField(CustomButton(text: "Signup", onPressed: () {
+                        Get.to(()=>VerificationScreen(text: "We've sent a verification code to\n1253 2456 2529", callback: (){
 
+                        }));
                     })),
 
                     _formField(
@@ -159,12 +161,7 @@ class SignupScreen extends StatelessWidget {
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
                   // TODO: navigate to login page
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LoginScreen(),
-                    ),
-                  );
+                  Get.to(()=>LoginScreen());
                 },
             ),
           ],

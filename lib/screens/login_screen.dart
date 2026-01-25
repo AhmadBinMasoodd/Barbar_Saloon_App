@@ -1,4 +1,5 @@
 import 'package:barbar_saloon_app/controllers/switch_controller.dart';
+import 'package:barbar_saloon_app/screens/forget_password_screen.dart';
 import 'package:barbar_saloon_app/screens/signup_screen.dart';
 import 'package:barbar_saloon_app/screens/verification_screen.dart';
 import 'package:flutter/gestures.dart';
@@ -119,7 +120,9 @@ class LoginScreen extends StatelessWidget {
             ],
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(()=>ForgetPasswordScreen());
+            },
             child: const Text(
               'Forget Password?',
               style: TextStyle(
@@ -181,10 +184,7 @@ class LoginScreen extends StatelessWidget {
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
                   // TODO: navigate to login page
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignupScreen()),
-                  );
+                  Get.to(()=>SignupScreen());
                 },
             ),
           ],
