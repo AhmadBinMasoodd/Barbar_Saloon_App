@@ -20,6 +20,7 @@ dependencies:
   firebase_auth: ^6.1.4
   firebase_core: ^4.4.0
   firebase_database: ^12.1.2
+  flutter_dotenv: ^5.2.1
 
 dev_dependencies:
   flutter_test:
@@ -32,6 +33,7 @@ flutter:
   # Assets (make sure these folders exist)
   assets:
     - assets/images/
+    - .env
 
   # Fonts
   fonts:
