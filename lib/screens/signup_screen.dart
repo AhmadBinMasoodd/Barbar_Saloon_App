@@ -118,41 +118,45 @@ class SignupScreen extends StatelessWidget {
                               () => VerificationScreen(
                                 text:
                                     "We've sent a verification code to\n1253 2456 2529",
-                                callback: () async {
-                                  await userCredential.user!.reload();
-                                  if (userCredential.user!.emailVerified) {
-                                    Get.snackbar(
-                                      'Verified',
-                                      'Your Email is Verified',
-                                    );
-                                    final DatabaseReference database_reference =
-                                        FirebaseDatabase.instance.ref();
-                                    User? user = userCredential.user;
-                                    await database_reference
-                                        .child("users")
-                                        .child(user!.uid)
-                                        .set({
-                                          "fullName": nameController.text
-                                              .trim(),
-                                          "email": emailController.text.trim(),
-                                          "phone": phoneController.text.trim(),
-                                          "gender": signupController
-                                              .selectedGender
-                                              .value,
-                                          "role": signupController
-                                              .selectedRole
-                                              .value,
-                                          "createdAt": DateTime.now()
-                                              .toIso8601String(),
-                                        });
-                                    print("User can signed up successfully");
-                                  } else {
-                                    Get.snackbar(
-                                      "Not Verified",
-                                      "Please verify your email first.",
-                                    );
+                                  callback: () async {
+                                    User? user = FirebaseAuth.instance.currentUser;
+
+                                    for (int i = 0; i < 12; i++) { // ~60 seconds total
+                                      await user?.reload();
+                                      user = FirebaseAuth.instance.currentUser;
+
+                                      if (user != null && user.emailVerified) {
+                                        break;
+                                      }
+
+                                      await Future.delayed(const Duration(seconds: 5));
+                                    }
+
+                                    if (user != null && user.emailVerified) {
+                                      Get.snackbar('Verified', 'Your Email is Verified');
+
+                                      final DatabaseReference databaseReference =
+                                      FirebaseDatabase.instance.ref();
+
+                                      await databaseReference.child("users").child(user.uid).set({
+                                        "fullName": nameController.text.trim(),
+                                        "email": user.email,
+                                        "phone": phoneController.text.trim(),
+                                        "gender": signupController.selectedGender.value,
+                                        "role": signupController.selectedRole.value,
+                                        "createdAt": DateTime.now().toIso8601String(),
+                                      });
+
+                                      print("User signed up successfully");
+                                    } else {
+                                      Get.snackbar(
+                                        "Not Verified",
+                                        "Verification can take up to 1 minute. Please wait.",
+                                      );
+                                    }
                                   }
-                                },
+
+
                               ),
                             );
                           } on FirebaseAuthException catch (e) {

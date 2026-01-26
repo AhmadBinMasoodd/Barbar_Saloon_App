@@ -71,7 +71,9 @@ class VerificationScreen extends StatelessWidget {
                         ),
                       )),
 
-                      const SizedBox(height: 350),
+                      const SizedBox(height: 300),
+                      CircularProgressIndicator(),
+
 
                       CustomButton(
                         text: "Verify Code",
