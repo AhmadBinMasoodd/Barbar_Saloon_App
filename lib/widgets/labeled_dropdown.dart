@@ -1,10 +1,12 @@
 import 'package:barbar_saloon_app/config/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class LabeledDropdown extends StatefulWidget {
+class LabeledDropdown extends StatelessWidget {
   final String label;
   final List<String> items;
   final String hint;
+  final RxString selectedValue; // Use RxString from GetX
   final Function(String) onChanged;
 
   const LabeledDropdown({
@@ -12,24 +14,18 @@ class LabeledDropdown extends StatefulWidget {
     required this.label,
     required this.items,
     required this.hint,
+    required this.selectedValue,
     required this.onChanged,
   });
-
-  @override
-  State<LabeledDropdown> createState() => _LabeledDropdownState();
-}
-
-class _LabeledDropdownState extends State<LabeledDropdown> {
-  String? selectedValue;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.label),
+        Text(label),
         const SizedBox(height: 8),
-        Container(
+        Obx(() => Container(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(
             color: AppColors.white,
@@ -38,22 +34,23 @@ class _LabeledDropdownState extends State<LabeledDropdown> {
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
-              value: selectedValue,
-              hint: Text(widget.hint),
+              value: selectedValue.value == '' ? null : selectedValue.value,
+              hint: Text(hint),
               isExpanded: true,
               icon: const Icon(Icons.keyboard_arrow_down),
               onChanged: (value) {
-                setState(() {
-                  selectedValue = value;
-                });
-                widget.onChanged(value!);
+                selectedValue.value = value!; // Update RxString
+                onChanged(value); // Optional callback
               },
-              items: widget.items.map((item) {
-                return DropdownMenuItem(value: item, child: Text(item));
-              }).toList(),
+              items: items
+                  .map((item) => DropdownMenuItem(
+                value: item,
+                child: Text(item),
+              ))
+                  .toList(),
             ),
           ),
-        ),
+        )),
       ],
     );
   }

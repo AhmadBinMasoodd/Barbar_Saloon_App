@@ -5,9 +5,12 @@ import 'package:barbar_saloon_app/widgets/labeled_phone_field.dart';
 import 'package:barbar_saloon_app/widgets/labeled_text_field.dart';
 import 'package:barbar_saloon_app/widgets/social_buttons.dart';
 import 'package:barbar_saloon_app/config/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../controllers/signup_controller.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_divider_with_text.dart';
 import '../widgets/labeled_dropdown.dart';
@@ -21,6 +24,7 @@ class SignupScreen extends StatelessWidget {
     final emailController = TextEditingController();
     final phoneController = TextEditingController();
     final passwordController = TextEditingController();
+    final signupController = Get.put(SignupController());
 
     return Scaffold(
       appBar: const MyAppBar(title: 'Signup'),
@@ -71,9 +75,21 @@ class SignupScreen extends StatelessWidget {
                         label: "Gender",
                         hint: "Select Gender",
                         items: const ["Male", "Female", "Other"],
-                        onChanged: print,
+                        selectedValue: signupController.selectedGender,
+                        onChanged: (val) {}, // optional
                       ),
                     ),
+
+                    _formField(
+                      LabeledDropdown(
+                        label: "Role",
+                        hint: "Select Role",
+                        items: const ["Barber", "Customer"],
+                        selectedValue: signupController.selectedRole,
+                        onChanged: (val) {}, // optional
+                      ),
+                    ),
+
                     _formField(
                       LabeledTextField(
                         label: 'Password',
@@ -83,11 +99,68 @@ class SignupScreen extends StatelessWidget {
                       ),
                     ),
 
-                    _formField(CustomButton(text: "Signup", onPressed: () {
-                        Get.to(()=>VerificationScreen(text: "We've sent a verification code to\n1253 2456 2529", callback: (){
-
-                        }));
-                    })),
+                    _formField(
+                      CustomButton(
+                        text: "Signup",
+                        onPressed: () async {
+                          String email = emailController.text.trim();
+                          String password = passwordController.text.trim();
+                          try {
+                            UserCredential userCredential = await FirebaseAuth
+                                .instance
+                                .createUserWithEmailAndPassword(
+                                  email: email,
+                                  password: password,
+                                );
+                            await userCredential.user!.sendEmailVerification();
+                            print('Verification send');
+                            Get.to(
+                              () => VerificationScreen(
+                                text:
+                                    "We've sent a verification code to\n1253 2456 2529",
+                                callback: () async {
+                                  await userCredential.user!.reload();
+                                  if (userCredential.user!.emailVerified) {
+                                    Get.snackbar(
+                                      'Verified',
+                                      'Your Email is Verified',
+                                    );
+                                    final DatabaseReference database_reference =
+                                        FirebaseDatabase.instance.ref();
+                                    User? user = userCredential.user;
+                                    await database_reference
+                                        .child("users")
+                                        .child(user!.uid)
+                                        .set({
+                                          "fullName": nameController.text
+                                              .trim(),
+                                          "email": emailController.text.trim(),
+                                          "phone": phoneController.text.trim(),
+                                          "gender": signupController
+                                              .selectedGender
+                                              .value,
+                                          "role": signupController
+                                              .selectedRole
+                                              .value,
+                                          "createdAt": DateTime.now()
+                                              .toIso8601String(),
+                                        });
+                                    print("User can signed up successfully");
+                                  } else {
+                                    Get.snackbar(
+                                      "Not Verified",
+                                      "Please verify your email first.",
+                                    );
+                                  }
+                                },
+                              ),
+                            );
+                          } on FirebaseAuthException catch (e) {
+                            Get.snackbar('Error', e.message ?? "Signup Failed");
+                          }
+                        },
+                      ),
+                    ),
 
                     _formField(
                       const CustomDividerWithText(
@@ -161,7 +234,7 @@ class SignupScreen extends StatelessWidget {
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
                   // TODO: navigate to login page
-                  Get.to(()=>LoginScreen());
+                  Get.to(() => LoginScreen());
                 },
             ),
           ],
