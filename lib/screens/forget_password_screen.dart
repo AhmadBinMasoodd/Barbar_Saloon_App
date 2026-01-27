@@ -8,6 +8,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../config/colors.dart' show AppColors;
+import '../controllers/network_controller.dart';
 import '../widgets/app_bar.dart';
 import '../widgets/labeled_text_field.dart';
 
@@ -16,6 +17,8 @@ class ForgetPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final emailController = TextEditingController();
+    final NetworkController networkController = Get.put(NetworkController());
+
     return Scaffold(
       appBar: const MyAppBar(title: 'Login'),
       body: Container(
@@ -50,6 +53,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                     CustomButton(
                       text: 'Forget Password',
                       onPressed: () async {
+
                         String email = emailController.text.trim();
 
                         if (email.isEmpty) {
@@ -64,21 +68,31 @@ class ForgetPasswordScreen extends StatelessWidget {
                         }
 
                         try {
-                          await FirebaseAuth.instance.sendPasswordResetEmail(
-                            email: email,
-                          );
-                          Get.dialog(
-                            customDialogBox(
-                              imagePath: 'assets/images/illustration1.png',
-                              title: 'Email Sent',
-                              message:
-                                  'Password reset link has been successfully sent to your email',
-                              buttonText: 'Continue',
-                              onPressed: () {
-                                Get.off(() => LoginScreen());
-                              },
-                            ),
-                          );
+                          await networkController.checkConnection();
+                          if(networkController.isConnected.value){
+                            await FirebaseAuth.instance.sendPasswordResetEmail(
+                              email: email,
+                            );
+                            Get.dialog(
+                              customDialogBox(
+                                imagePath: 'assets/images/illustration1.png',
+                                title: 'Email Sent',
+                                message:
+                                'Password reset link has been successfully sent to your email',
+                                buttonText: 'Continue',
+                                onPressed: () {
+                                  Get.off(() => LoginScreen());
+                                },
+                              ),
+                            );
+                          }
+                          else{
+                            Get.dialog(
+                              customDialogBox(imagePath: 'assets/images/Group 34147.png', title: 'OOPS', message: 'Your device is not connected to internet\n Please try again', buttonText: 'Back to Home', onPressed: (){
+                                Get.off(()=>LoginScreen());
+                              })
+                            );
+                          }
                           // Replace screen → go back to Login
                         } on FirebaseAuthException catch (e) {
                           Get.snackbar(
