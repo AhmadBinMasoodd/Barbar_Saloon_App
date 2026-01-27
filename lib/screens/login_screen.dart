@@ -2,6 +2,7 @@ import 'package:barbar_saloon_app/controllers/switch_controller.dart';
 import 'package:barbar_saloon_app/screens/forget_password_screen.dart';
 import 'package:barbar_saloon_app/screens/signup_screen.dart';
 import 'package:barbar_saloon_app/screens/verification_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -52,7 +53,7 @@ class LoginScreen extends StatelessWidget {
                         isEmail: true,
                       ),
                     ),
-              
+
                     _formField(
                       LabeledTextField(
                         label: 'Password',
@@ -62,8 +63,49 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     _forgetPassword(false),
-                    _formField(CustomButton(text: "Login", onPressed: () {})),
-              
+                    _formField(
+                      CustomButton(
+                        text: "Login",
+                        onPressed: () async {
+                          try {
+                            String email = emailController.text.trim();
+                            String password = passwordController.text.trim();
+                            if (email.isEmpty || password.isEmpty) {
+                              Get.snackbar(
+                                'Error',
+                                'Please fill all fields',
+                                snackPosition: SnackPosition.BOTTOM,
+                                backgroundColor: AppColors.primary,
+                                colorText: AppColors.white,
+                              );
+                              return;
+                            }
+                            FirebaseAuth auth = FirebaseAuth.instance;
+                            UserCredential userCredential = await auth
+                                .signInWithEmailAndPassword(
+                                  email: email,
+                                  password: password,
+                                );
+
+                            Get.snackbar(
+                              'Login Sucessful',
+                              'You are successfully logg in',
+                              backgroundColor: AppColors.primary,
+                              colorText: AppColors.white,
+                              snackPosition: SnackPosition.BOTTOM,
+                            );
+                          } on FirebaseAuthException catch (e) {
+                            Get.snackbar(
+                              'Login Failed',
+                              e.message ?? 'Something went wrong',
+                              backgroundColor: AppColors.primary,
+                              colorText: AppColors.white,
+                            );
+                          }
+                        },
+                      ),
+                    ),
+
                     _formField(
                       const CustomDividerWithText(
                         text: "Continue with",
@@ -73,11 +115,11 @@ class LoginScreen extends StatelessWidget {
                         fontSize: 16,
                       ),
                     ),
-              
+
                     _formField(const SocialLoginSection()),
-              
+
                     const SizedBox(height: 10),
-              
+
                     _buildLoginText(context),
                   ],
                 ),
@@ -95,19 +137,20 @@ class LoginScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-
           Row(
             children: [
               Transform.scale(
                 scale: 0.7, // try 0.6 – 0.8
-                child: Obx(() => Switch(
-                  value: switchController.isOn.value,
-                  onChanged: switchController.toggleSwitch,
-                  activeColor: AppColors.primary,
-                  activeTrackColor: AppColors.primary.withOpacity(.4),
-                  inactiveThumbColor: AppColors.switchText,
-                  inactiveTrackColor: AppColors.switchText.withOpacity(.5),
-                )),
+                child: Obx(
+                  () => Switch(
+                    value: switchController.isOn.value,
+                    onChanged: switchController.toggleSwitch,
+                    activeColor: AppColors.primary,
+                    activeTrackColor: AppColors.primary.withOpacity(.4),
+                    inactiveThumbColor: AppColors.switchText,
+                    inactiveTrackColor: AppColors.switchText.withOpacity(.5),
+                  ),
+                ),
               ),
               Text(
                 'Save Me',
@@ -121,7 +164,7 @@ class LoginScreen extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Get.to(()=>ForgetPasswordScreen());
+              Get.to(() => ForgetPasswordScreen());
             },
             child: const Text(
               'Forget Password?',
@@ -178,13 +221,13 @@ class LoginScreen extends StatelessWidget {
             TextSpan(
               text: "Sign up",
               style: const TextStyle(
-                color: Color(0xFF6F45F0),
+                color: AppColors.primary,
                 fontWeight: FontWeight.bold,
               ),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
                   // TODO: navigate to login page
-                  Get.to(()=>SignupScreen());
+                  Get.off(() => SignupScreen());
                 },
             ),
           ],

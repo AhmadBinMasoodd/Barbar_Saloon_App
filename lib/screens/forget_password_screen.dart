@@ -1,11 +1,16 @@
+import 'package:barbar_saloon_app/screens/login_screen.dart';
 import 'package:barbar_saloon_app/screens/verification_screen.dart';
+import 'package:barbar_saloon_app/widgets/customDialogBox.dart';
 import 'package:barbar_saloon_app/widgets/custom_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../config/colors.dart' show AppColors;
 import '../widgets/app_bar.dart';
 import '../widgets/labeled_text_field.dart';
+
 class ForgetPasswordScreen extends StatelessWidget {
   const ForgetPasswordScreen({super.key});
   @override
@@ -42,15 +47,50 @@ class ForgetPasswordScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 400),
-                    CustomButton(text: 'Forget Password', onPressed: (){
-                      if(emailController.text.isEmpty){
+                    CustomButton(
+                      text: 'Forget Password',
+                      onPressed: () async {
+                        String email = emailController.text.trim();
 
-                      }else{
-                        Get.to(()=>VerificationScreen(text: "", callback:(){
+                        if (email.isEmpty) {
+                          Get.snackbar(
+                            'Error',
+                            'Please enter your email',
+                            snackPosition: SnackPosition.BOTTOM,
+                            backgroundColor: AppColors.backgroundLight,
+                            colorText: AppColors.textBlack,
+                          );
+                          return;
+                        }
 
-                        }));
-                      }
-                    })
+                        try {
+                          await FirebaseAuth.instance.sendPasswordResetEmail(
+                            email: email,
+                          );
+                          Get.dialog(
+                            customDialogBox(
+                              imagePath: 'assets/images/illustration1.png',
+                              title: 'Email Sent',
+                              message:
+                                  'Password reset link has been successfully sent to your email',
+                              buttonText: 'Continue',
+                              onPressed: () {
+                                Get.off(() => LoginScreen());
+                              },
+                            ),
+                          );
+                          // Replace screen → go back to Login
+                        } on FirebaseAuthException catch (e) {
+                          Get.snackbar(
+                            'Error',
+                            e.message ?? 'Something went wrong',
+                            snackPosition: SnackPosition.BOTTOM,
+                            backgroundColor: AppColors.backgroundLight,
+                            colorText: AppColors.textBlack,
+                          );
+                        }
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -60,7 +100,6 @@ class ForgetPasswordScreen extends StatelessWidget {
       ),
     );
   }
-
 
   // Header Text
   Widget _buildHeaderText() {
@@ -90,5 +129,4 @@ class ForgetPasswordScreen extends StatelessWidget {
       child: child,
     );
   }
-
 }
